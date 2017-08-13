@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular1.5.8.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA" >
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+    //在factory模块下自定义服务,问题在于不能够进行初始化配置,如果想进行config操作,
+    //配置更多的功能就可以在provider模块下自定义服务
+
+    //第一个参数是服务的名称,和factory写法上的区别是provider用了一个嵌套:
+    //
+    //    return{
+    //        $get:function () {
+    //
+    //        }
+    //    }
+    //
+
+    m1.provider('myService',function () {
+
+        return{
+            name:'hello',
+            $get:function () {
+                return{
+                    name:this.name,
+                    show:function () {
+                        return this.name+':angular';
+                    }
+                }
+            }
+        }
+    });
+
+
+    m1.config(['myServiceProvider',function (myServiceProvider) {
+        console.log(myServiceProvider);
+        myServiceProvider.name='hi'  //修改了服务的name
+
+    }])
+
+
+
+
+    m1.controller("AAA", ["$scope","myService",function ($scope,myService) {
+
+        console.log(myService.show())
+        }])
+</script>
+</html>

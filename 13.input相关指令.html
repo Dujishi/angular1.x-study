@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.5.8.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+
+    <!--ng-disabled 不可以选状态-->
+    <input type="button" value="{{text}}" ng-disabled="isdisabled">
+    <!--ng-readonly 只读状态-->
+    <input type="text" ng-readonly="isdisabled" value="{{text}}">
+    <input type="checkbox" ng-checked="isdisabled">
+
+    <!--ng-value 就不需要加上大括号,用于提高用户体验,当js未解析{{value}}可能看到大括号-->
+    <input type="text" ng-value="age">
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+    m1.controller("AAA", ["$scope", "$interval", function ($scope, $interval) {
+
+
+        var time = 5;
+        $scope.text = time + '秒';
+        $scope.isdisabled = true;
+
+        var timer = $interval(function () {
+            time--;
+            $scope.text = time + '秒';
+            if (time == 0) {
+                $scope.isdisabled = false;
+                $scope.text = '可以点击了';
+                $interval.cancel(timer)
+            }
+        }, 1000)
+
+
+    }])
+
+</script>
+</html>

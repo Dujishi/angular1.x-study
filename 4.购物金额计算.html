@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+    <p>价格：<input type="text" ng-model="iphone.money"></p>
+    <p>个数：<input type="text" ng-model="iphone.num"></p>
+    <p>费用：<span>{{sum()|currency:"¥"}}</span></p>
+    <p>运费：<span>{{iphone.fre}}</span></p>
+    <p>总额：<span>{{(sum()+iphone.fre)|currency:"$"}}</span></p>
+</div>
+</body>
+<script>
+    function AAA($scope) {
+        $scope.iphone = {
+            money: 10,
+            num: 1,
+        }
+        $scope.sum = function () {
+            return $scope.iphone.money * $scope.iphone.num;
+        }
+        // $watch监听，第一个参数是要监听的变量,想监听所有，则需要加上第三个参数true
+        $scope.$watch($scope.sum, function (newval, oldval) {
+            $scope.iphone.fre = newval >= 100 ? 0 : 10
+        })
+    }
+</script>
+</html>

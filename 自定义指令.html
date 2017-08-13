@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+<hello></hello>
+<div hello></div>
+<p class="p"></p>
+<!-- directive:hello -->
+<div ng-controller="AAA">
+</div>
+</body>
+<script>
+    var m1 = angular.module("myapp", []);
+    //        directive实现自定义指令
+    m1.directive("hello", function () {
+        return {
+//            restrict下面的参数表示创建指令的种类(必须大写,还可以复合使用)
+//            E代表标签指令;
+//            A代表属性指令;
+//            C代表class指令;
+//            M代表注释指令(没有写replace不生效)
+
+//            C和M用的很少,EA用的多一些,
+//            标签指令,在重写以前html标签的功能或者以一种模板的方式进行交互
+//            功能性的指令一般写成属性方式
+//
+            restrict: 'A',
+//            可以同时支持
+            restrict: 'AECM',
+//            template给指令添加模板
+            template: '<div>hello,angular</div>',
+//            replace:true表示模板可以替换原来的标签
+            replace: true
+        }
+    })
+
+
+    m1.controller("AAA", ["$scope", function ($scope) {
+    }])
+</script>
+</html>

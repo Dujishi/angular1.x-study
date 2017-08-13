@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.5.8.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+
+
+    <!--ng-selected选中时候触发事件-->
+    <input type="checkbox" ng-model="onoff">
+    <select name="" id="">
+        <option value="">1111</option>
+        <option value="" ng-selected="onoff">2222</option>
+    </select>
+
+
+    <!--ng-change当输入框输入内容改变触发事件-->
+    <input type="text" ng-change="text='你改变了内容'" ng-model='text'>{{text}}<br>
+
+
+    <input type="text" value="aaaaaa"
+           ng-copy="ccc='你进行复制操作了'"
+           ng-cut="ccc='你进行剪切操作了'"
+           ng-paste="ccc='你进行粘贴操作了'"
+    >{{ccc}}
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+    m1.controller("AAA", ["$scope", function ($scope) {
+
+        $scope.text = 'dujishi'
+
+    }])
+
+</script>
+</html>

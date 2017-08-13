@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+
+    <p>{{name|firstUp}}</p>
+    <p>{{name2}}</p>
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+
+    //     自定义过滤器用filter方法,同样在js中和在表达式两种方法都可以运用过滤器
+    m1.filter("firstUp", function () {
+        return function (str) {
+//             substring(1)表示从第1位开始所有都选取
+            return str.charAt(0).toUpperCase() + str.substring(1)
+        }
+    })
+
+
+    m1.controller("AAA", ["$scope", "$filter", function ($scope, $filter) {
+
+        $scope.name = "hello";
+        $scope.name2 = $filter("firstUp")("hello")
+
+    }])
+
+</script>
+</html>

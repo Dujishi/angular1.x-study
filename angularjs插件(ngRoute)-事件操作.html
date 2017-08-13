@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular1.5.8.min.js"></script>
+    <script src="route.min.js"></script>  <!-- 引入插件-->
+</head>
+<body>
+<div ng-controller="AAA" >
+
+    <!--需要传参时-->
+    <a href="" ng-click="$location.path('aaa/123')">公司首页</a>
+    <a href="" ng-click="$location.path('aaa/456')">公司简介</a>
+    <a href="" ng-click="$location.path('bbb')">公司新闻</a>
+    <a href="" ng-click="$location.path('ccc')">公司招聘</a>
+
+    <!--ng-view 就是切换主体部分的-->
+    <div ng-view></div>  <!--主体内容在这里显示-->
+
+</div>
+</body>
+<script>
+
+
+    var m1 = angular.module("myapp", ['ngRoute']);
+
+    m1.config(['$routeProvider',function ($routeProvider) {
+
+        $routeProvider
+                .when('/aaa/:num',{
+                    template:'<p>aaaaaa</p>{{name}}',
+                    controller:'AAA'
+                })
+                .when('/bbb',{
+                    template:'<p>bbbbbb</p>{{name}}',
+                    controller:'BBB'
+                })
+                .when('/ccc',{
+                    template:'<p>cccccc</p>{{name}}',
+                    controller:'CCC'
+                })
+                .otherwise({
+                    redirectTo:'/aaa'
+                })
+
+    }])
+
+    //绑定事件
+    m1.run(['$rootScope',function ($rootScope) {
+        $rootScope.$on('$routeChangeStart',function (event) {
+            //第一个参数是事件的名字,$routeChangeStart指路由切换开始的事件;
+            //$routeChangeSuccess,指了路由切换成功调用的事件;
+            //$Error,指路由切换失败调用的事件;
+
+            //function里面也可以有三个参数:event,current,pre;
+
+
+//            其中event对象下面有几个属性:
+//                targetScope:当前目标的作用域,
+//                currentScope:当前的作用域,
+//                name:事件的名字,
+//                event.stopPropagation() 阻止向上传播的方法
+
+
+            console.log(event.targetScope)
+        })
+    }])
+
+
+    m1.controller("AAA", ["$scope","$location","$routeParams",function ($scope,$location,$routeParams) {
+        $scope.name="AA";
+        $scope.$location=$location;
+        console.log($routeParams)
+
+        }])
+    m1.controller("BBB", ["$scope",function ($scope) {
+        $scope.name="BB"
+
+    }])
+    m1.controller("CCC", ["$scope",function ($scope) {
+        $scope.name="CC"
+
+    }])
+
+</script>
+</html>

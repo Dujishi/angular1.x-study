@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA" >
+    <p>@@name@@</p>
+</div>
+</body>
+<script>
+
+//  供应商:进行服务的相关初始配置操作,写在config模块方法当中,大部分服务都有,例如$interpolate,$log等
+
+    var m1 = angular.module("myapp", []);
+//  服务名称加上Provider就是该服务的供应商,对服务进行初始化配置
+    m1.config(['$interpolateProvider','$logProvider',function ($interpolateProvider,$logProvider) {
+
+//  改变前后标识,从'{{}}'变为'@@@@'
+        $interpolateProvider.startSymbol('@@');
+        $interpolateProvider.endSymbol('@@');
+
+        $logProvider.debugEnabled(false) //当为false时就不输出调试信息
+
+
+
+    }]);
+    m1.controller("AAA", ["$scope","$interpolate","$log",function ($scope,$interpolate,$log) {
+        $scope.name='hello';
+
+        $log.debug("这是调试信息")
+        }])
+</script>
+</html>

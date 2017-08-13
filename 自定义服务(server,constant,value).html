@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular1.5.8.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA" >
+
+</div>
+</body>
+<script>
+
+    //service基于面向对象开发,针对构造函数定义
+
+//    var m1 = angular.module("myapp", []);
+//    m1.service('myService',FnService);
+//    function FnService() {
+//        this.name='hello'
+//    }
+//    FnService.prototype.age=20;
+//
+//    m1.controller("AAA", ["$scope","myService",function ($scope,myService) {
+//
+//        console.log(myService.name+'+'+myService.age)
+//        }])
+//
+
+    //constant自定义方式,针对常量,可配置
+
+//    var m1 = angular.module("myapp", []);
+//    m1.constant('myService','Hello Angular!');
+//    m1.config('myService',function (myService) {
+//        console.log(myService)
+//    })
+//
+//
+//    m1.controller("AAA", ["$scope","myService",function ($scope,myService) {
+//
+//        console.log(myService)
+//    }])
+
+    //value自定义方式,针对常量,不可配置
+
+    var m1 = angular.module("myapp", []);
+    m1.value('myService','Hello Angular!');
+
+    m1.controller("AAA", ["$scope","myService",function ($scope,myService) {
+
+        console.log(myService)
+    }])
+
+</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .red {
+            background-color: red;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+    </style>
+    <script src="angular1.5.8.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+
+    <div ng-class="{red:true,blue:true}">{{text}}</div>
+    <div ng-class="{{class}}">{{text}}</div>
+    <!--ng-class可以改变真假实现样式的添加和删除-->
+
+
+    <div ng-style="{color:'red',backgroundColor:'green'}">{{text}}</div>
+    <div ng-style="{{style}}">{{text}}</div>
+    <!--ng-style是在行间添加样式-->
+
+
+    <!--ng-attr-(属性名)用于扩展ng-?-->
+    <a ng-attr-title="{{text}}" ng-attr-href="{{url}}">aaaa</a>
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+    m1.controller("AAA", ["$scope", function ($scope) {
+
+        $scope.text = "hello";
+        $scope.url = "http://www.disyo.com";
+        $scope.class = "{red:true,blue:true}";
+        $scope.style = "{color:'red',backgroundColor:'green'}"
+
+    }])
+
+</script>
+</html>

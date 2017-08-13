@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular1.5.8.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA" id="parent">
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+    // $q服务是Promise的一种实现方式,对异步操作功能的扩展
+
+    m1.controller("AAA", ["$scope", "$q",function ($scope, $q) {
+
+        var dfd=$q.defer();  //创建一个延迟对象
+
+        function show() {
+            setTimeout(function () {
+                dfd.resolve();
+            },2000)
+            return dfd.promise;
+        }
+
+        show().then(function () {
+            alert('成功')
+        },function () {
+            alert('失败')
+        })
+
+        }])
+</script>
+</html>

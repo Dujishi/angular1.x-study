@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.5.8.min.js"></script>
+</head>
+<body>
+
+<!--对原有的html的一些标签进行重新的构建,产生一个新的功能的标签,叫做标签指令-->
+
+<div ng-controller="AAA" ng-app="myapp">
+
+    <a href="">angular的a标签</a><br><br> <!--angular的a标签点击会不会触发默认行为-->
+
+    <a href="">{{value.name}}</a>
+    <select name="" id="" ng-options="color.name for color in colors" ng-model="value">
+    </select>
+
+    <!--novalidate解除form自带的默认样式-->
+    <form action="" novalidate>
+        <input type="email">
+    </form>
+
+
+</div>
+<br><br><br><br>
+
+<a href="">普通的a标签</a>  <!--普通的a标签点击会触发默认行为即刷新页面-->
+
+</body>
+
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+    m1.controller("AAA", ["$scope", function ($scope) {
+
+        $scope.colors = [{name: 'red'}, {name: 'green'}, {name: 'blue'}]
+
+    }])
+
+</script>
+</html>

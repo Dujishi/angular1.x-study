@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="angular1.5.8.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+
+    <div ng-show="true">aaaaaaaaaaa</div>
+    <div ng-hide="true">aaaaaaaaaaa</div>
+    <!--ng-show是通过改变css样式实现隐藏(false)和显示(true),ng-hide与之相反-->
+
+    <div ng-if="true">aaaaaaaaaa</div>
+    <!--ng-if是通过DOM添加删除实现隐藏(false)和显示(true)-->
+
+
+    <input type="checkbox" ng-model="btn">
+    <div ng-switch on="btn">
+        <p ng-switch-default>当前是默认的效果</p>
+        <p ng-switch-when="false">现在是切换的效果</p>
+    </div>
+
+
+    <details ng-open="btn">
+        <summary>Copyright 2011.</summary>
+        <p>All pages and graphics on this web site are the property of w3chtml.</p>
+    </details>
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+    m1.controller("AAA", ["$scope", function ($scope) {
+
+        $scope.btn = true
+
+    }])
+
+</script>
+</html>

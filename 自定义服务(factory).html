@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular1.5.8.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA" id="parent">
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+    //在factory模块下自定义服务,第一个参数是服务的名称,名称尽量不使用$开头,
+    //因为$开头一般都是内部的服务,为了避免混淆,第二个可以是一个回调函数也可以是数组,
+    //如果需要操作里面的服务,尽量使用数组的方式,那自定义的服务写在内部服务的后面;
+
+//    m1.factory('myService',function () {
+//        return{
+//            name:'helo',
+//            show:function () {
+//                return this.name+':angular';
+//            }
+//        }
+//    })
+
+    //写一个产生随机数的服务
+        m1.factory('myRandomNum',function () {
+            return function (num1,num2) {
+                return Math.random()*(num2-num1)+num1
+            }
+        })
+
+
+    m1.controller("AAA", ["$scope",/*"myService",*/"myRandomNum",function ($scope,/*myService,*/myRandomNum) {
+
+        //console.log(myService.show())
+        console.log(myRandomNum(-3,6))
+
+        }])
+</script>
+</html>

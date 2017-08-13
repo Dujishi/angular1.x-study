@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">{{name}}</div>
+</body>
+<script>
+    function AAA($scope, $timeout) {
+
+        $scope.name = "aaa";
+//	 	$timeout(function () {
+//	 		$scope.name="bbb";
+//	 	},2000);
+
+// 原生的js使用不生效,可以用$apply监听数据有没有变化,一有变化就会影响视图,好处是第三方库可以直接用
+        setTimeout(function () {
+            $scope.$apply(function () {
+                $scope.name = "bbb";
+            })
+        }, 2000)
+    }
+
+</script>
+</html>

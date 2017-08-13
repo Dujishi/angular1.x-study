@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.5.8.min.js"></script>
+    <script src="angular-sanitize.min.js"></script>
+
+</head>
+<body>
+<div ng-controller="AAA">
+
+    <div>{{name}}</div>
+    <div ng-bind="name"></div>
+    <!--以上两种显示效果是一样的,只是下面这种ng-bind方式可以提高用户体验,使其不会被用户看到{{}}-->
+
+    <div>{{name}},{{name}}</div>
+    <div ng-bind-template="{{name}},{{name}}"></div>
+    <!--支持多表达式-->
+
+    <div ng-bind-html="text"></div>
+    <!--ng-bind-html用得比较少,所以在angularjs.min.js里没有,需要再加载另一个插件,也可以看做是一个模块,
+    所以需要引入这个模块-->
+    <!--angular-sanitize.min.js-->
+
+    <div ng-cloak>{{name}}</div>
+    <!--ng-cloak是改变css样式原理,当未加载完是display为none,加载完后为block,同样提高用户体验,看不到{{}}-->
+
+    <div ng-non-bindable>{{name}}</div>
+    <!--如果有意显示{{}},则用ng-non-bindable指令-->
+
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", ['ngSanitize']);
+
+    m1.controller("AAA", ["$scope", function ($scope) {
+
+        $scope.name = 'hello';
+        $scope.text = '<h1>dujishi</h1>'
+
+    }])
+
+</script>
+</html>

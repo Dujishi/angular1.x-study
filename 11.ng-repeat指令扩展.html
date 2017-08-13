@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .active {
+            background-color: red
+        }
+    </style>
+    <script src="angular1.5.8.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+    <ul>
+        <!--$index输出索引号-->
+        <li ng-repeat="data in dataList">{{$index}}</li>
+
+        <!--$first第一项返回真其余为假-->
+        <!--$last最后项返回真其余为假-->
+        <!--$middle中间为真两头为假-->
+        <!--$odd偶数行为真,奇数行为假,$even相反-->
+        <li ng-repeat="data in dataList">{{$first}}</li>
+
+        <li ng-repeat="data in dataList" class="{{$odd?'active':''}}">{{data}}</li>
+
+    </ul>
+
+    <!--ng-repeat-start和ng-repeat-end代表循环的起点和终点-->
+
+    <div ng-repeat-start="data in dataList">{{data}}</div>
+    <p>{{data}}</p>
+    <div ng-repeat-end>{{data}}</div>
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+    m1.controller("AAA", ["$scope", function ($scope) {
+
+        $scope.dataList = [
+            "aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee", "fffff"
+        ]
+
+    }])
+
+</script>
+</html>

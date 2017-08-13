@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+
+
+
+    </style>
+    <script src="angular1.5.8.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.5.8/angular-animate.min.js"></script>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+    <input type="checkbox" ng-model="bBtn">
+   <!--<div ng-if="bBtn" class="box"></div>   &lt;!&ndash;ng-if动态的添加和删除&ndash;&gt;-->
+    <div ng-show="bBtn" class="box"></div>
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", ['ngAnimate']);
+
+ //   JS方式
+ //   animation
+
+//    ng-if
+//    m1.animation('.box',function () {
+//        return{
+//            leave:function (element,done) {
+//            //element 是这个元素,done作用是触发这个函数指令进行操作,若无done,则只会执行运动,不会执行指令的操作
+//                $(element).animate({width:0,height:0},2000,done)
+//            },
+//            enter:function (element,done) {
+//                $(element).css({width:0,height:0}) //这里是创建初始化css,让它从0开始,改变样式
+//                $(element).animate({width:100,height:100},2000,done)
+//            },
+//        }
+//    })
+
+//    ng-show
+    m1.animation('.box',function () {
+        return{
+            addClass:function (element,sClass,done) {
+                //element 是这个元素,done作用是触发这个函数指令进行操作,若无done,则只会执行运动,不会执行指令的操作
+                $(element).animate({width:0,height:0},2000,done)
+            },
+            removeClass:function (element,sClass,done) {
+                $(element).css({width:0,height:0}) //这里是创建初始化css,让它从0开始,改变样式
+                $(element).animate({width:100,height:100},2000,done)
+            },
+        }
+    })
+
+
+
+
+    m1.controller("AAA", ["$scope", function ($scope) {
+        $scope.bBtn = true;
+
+
+    }])
+
+</script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular1.5.8.min.js"></script>
+    <script src="route.min.js"></script>  <!-- 引入插件-->
+</head>
+<body>
+<div ng-controller="AAA" >
+
+    <!--href方式-->
+    <!--<a href="#aaa">公司首页</a>-->
+    <!--<a href="#bbb">公司简介</a>-->
+    <!--<a href="#ccc">公司新闻</a>-->
+    <!--<a href="#ddd">公司招聘</a>-->
+
+    <!--$location服务方式-->
+    <a href="" ng-click="$location.path('aaa')">公司首页</a>
+    <a href="" ng-click="$location.path('bbb')">公司简介</a>
+    <a href="" ng-click="$location.path('ccc')">公司新闻</a>
+    <a href="" ng-click="$location.path('ddd')">公司招聘</a>
+
+
+    <!--ng-view 就是切换主体部分的-->
+    <div ng-view></div>  <!--主体内容在这里显示-->
+
+</div>
+</body>
+<script>
+
+//单页面路由操作方式:在一个页面跳转,自动添加历史管理
+    var m1 = angular.module("myapp", ['ngRoute']);
+
+    m1.config(['$routeProvider',function ($routeProvider) {
+
+        $routeProvider
+
+                .when('/aaa',{
+                    template:'<p>aaaaaa</p>{{name}}',
+                    controller:'AAA'
+                })
+                .when('/bbb',{
+                    template:'<p>bbbbbb</p>{{name}}',
+                    controller:'BBB'
+                })
+                .when('/ccc',{
+                    template:'<p>cccccc</p>{{name}}',
+                    controller:'CCC'
+                })
+                .when('/ddd',{
+                    template:'<p>dddddd</p>{{name}}',
+                    controller:'DDD'
+                })
+                .otherwise({           //otherwise就是在初始化或者错误的时候做处理
+                    redirectTo:'/aaa'  //默认的哈希值
+                })
+
+    }])
+
+    //$location方法可以配合路由使用
+    //传参时用到$routeParams,用来获取参数
+
+    m1.controller("AAA", ["$scope","$location",function ($scope,$location) {
+        $scope.name="AA";
+        $scope.$location=$location;
+
+        }])
+    m1.controller("BBB", ["$scope",function ($scope) {
+        $scope.name="BB"
+
+    }])
+    m1.controller("CCC", ["$scope",function ($scope) {
+        $scope.name="CC"
+
+    }])
+    m1.controller("DDD", ["$scope",function ($scope) {
+        $scope.name="DD"
+
+    }])
+</script>
+</html>

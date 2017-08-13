@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular1.5.8.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA" >
+
+</div>
+</body>
+<script>
+
+//    可以将自定义服务放在一个文件夹,其他文件也可以引用,这时provider就体现出优点,
+//    它能够进行初始化配置
+
+    var m1 = angular.module("module1", []);
+    m1.factory('myService',function () {
+
+        return{
+            name:'hello',
+            show:function () {
+                return this.name+':angular';
+            }
+        }
+    });
+
+    //模块的引入和插件引入相同
+    var m2 = angular.module("myapp", ['module1']);
+    m2.controller('AAA',['$scope','myService',function ($scope,myService) {
+        console.log(myService.show())
+    }])
+
+</script>
+</html>

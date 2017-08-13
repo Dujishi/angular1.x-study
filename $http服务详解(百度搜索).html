@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+    <input type="text" ng-model="name" ng-keyup="change(name)">
+    <input type="button" value="搜索">
+    <ul>
+        <li ng-repeat="a in data">{{a}}</li>
+    </ul>
+</div>
+</body>
+<script>
+    var m1=angular.module("myapp",[]);
+//    链式扩展
+    m1.controller("AAA",["$scope","$http","$timeout",function ($scope,$http,$timeout) {
+        $scope.data=[];
+        var timer=null;
+        $scope.change=function (name) {
+            $timeout.cancel(timer);
+
+            timer=$timeout(function () {
+                $http({
+                    method:"JSONP",
+                    url:"https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+name+"&cb=JSON_CALLBACK"
+                }).success(function (data,state,headers,config) {
+                    $scope.data=data.s;
+                    console.log(state);
+                    console.log(config);
+                })
+            },500)
+    }
+    }])
+</script>
+</html>

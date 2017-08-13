@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="angular1.2.16.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div ng-controller="AAA"></div>
+</body>
+<script>
+    var m1=angular.module('myapp',[]);
+
+       m1.provider('myRandomNum',function () {
+           return{
+               Bol:false,   //设一个开关变量
+               int:function (argBol) {
+                   if(argBol){
+                       this.Bol=true;
+                   }
+                   else {
+                       this.Bol=false;
+                   }
+               },
+
+               $get:function () {
+
+                   var This=this;
+                   return function (num1,num2) {
+                       return This.Bol?Math.round(Math.random()*(num2-num1))+num1:Math.random()*(num2-num1)+num1;
+                   };
+               }
+           };
+       });
+
+        m1.config(['myRandomNumProvider',function (myRandomNumProvider) {
+            myRandomNumProvider.int(true);  //当为true时就输出整数随机数,false为小数随机数
+        }])
+
+
+        m1.controller("AAA",["$scope","myRandomNum",function ($scope,myRandomNum) {
+            console.log(myRandomNum(-5,2))
+        }])
+
+
+</script>
+</html>

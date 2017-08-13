@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular1.5.8.min.js"></script>
+    <script src="route.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.5.8/angular-resource.min.js"></script>
+    <!-- 引入插件-->
+</head>
+<body>
+<div ng-controller="AAA" >
+{{data}}
+
+</div>
+</body>
+<script>
+
+//单页面路由操作方式:在一个页面跳转,自动添加历史管理
+    var m1 = angular.module("myapp", ['ngResource']);
+
+
+
+    m1.controller("AAA", ["$scope","$resource",function ($scope,$resource) {
+
+        var objRe=$resource('zhangsan.json')  //zhangsan.json是后台的一个json数据
+
+        $scope.data=objRe.get(); //获取到了后台的json
+
+
+        }])
+</script>
+</html>

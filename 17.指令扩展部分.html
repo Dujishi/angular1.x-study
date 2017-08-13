@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+<!--<div ng-controller="AAA">-->
+
+<!--<div ng-init="text='hello'">{{text}}</div>-->
+<!--&lt;!&ndash;因为可以直接在方法里面写$scope.text="hello",所以一般情况下ng-init尽量避免,-->
+<!--在嵌套循环的时候可以用ng-init&ndash;&gt;-->
+<!--<div ng-repeat="dataOut in arr" ng-init="outerIndex=$index" >-->
+<!--<div ng-repeat="dataInner in dataOut" ng-init="innerIndex=$index">-->
+<!--<p>{{dataInner}}:{{outerIndex}}{{innerIndex}}</p>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<!--&lt;!&ndash;ng-include通过模板方式引入文件&ndash;&gt;-->
+<!--<div ng-include="temp.html"></div>-->
+
+
+<!--&lt;!&ndash;ng-model-options可以控制双向数据绑定的触发条件,下面是以当把光标移开的时候改变&ndash;&gt;-->
+<!--<input type="data" ng-model="data" ng-model-options="{updateOn:'blur'}">-->
+<!--<p>{{data}}</p>-->
+
+<!--</div>-->
+
+
+<div ng-controller="FnAAA as a1">   <!--a1是构造函数创建出来的一个对象-->
+    <div>
+        {{a1.num}}{{a1.text}}{{a1.show()}}
+    </div>
+</div>
+
+
+</body>
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+    //    m1.controller("AAA", ["$scope", function ($scope) {
+    //
+    //        $scope.arr=[["a","b"],["c","d"]] //复合数组
+    //
+    //    }])
+
+
+    //  m1.controller同样支持面向对象的方式,不过高版本的angular.js貌似不支持
+
+    m1.controller(['$scope', FnAAA]);
+    //创建一个构造函数,然后给构造函数添加属性
+    function FnAAA($scope) {
+    }
+    FnAAA.prototype.num = "123";
+    FnAAA.prototype.text = "hello";
+    FnAAA.prototype.show = function () {
+        return "Hello djs"
+    };
+
+
+</script>
+</html>

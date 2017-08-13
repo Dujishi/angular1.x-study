@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+    <p>{{name}}</p>
+    <p>{{age}}</p>
+</div>
+
+<div ng-controller="BBB">
+    <p>{{name}}</p>
+    <p>{{age}}</p>
+</div>
+
+</body>
+<script>
+
+    // $scope是局部作用域，$rootScope是全局作用域,同样是就近原则
+
+
+    function AAA($scope, $rootScope) {
+        $scope.name = "aaa";
+        $rootScope.age = "10";
+    }
+
+    function BBB($scope) {
+        $scope.name = "bbb";
+    }
+</script>
+</html>

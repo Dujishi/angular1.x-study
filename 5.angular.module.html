@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+<div>
+    {{name}}
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", [])
+    //	    m1.controller("AAA",["$scope",function ($scope) {
+    //
+    //        }])
+
+    //run()相当于初始化全局数据。run只有全局作用域,没有局部作用域
+    m1.run(['$rootScope', function ($rootScope) {
+        $rootScope.name = "hello"
+    }])
+
+
+</script>
+</html>

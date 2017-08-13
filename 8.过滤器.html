@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+
+    <!--//如果有多个参数写法如下-->
+    <!--<p >{{price|currency:"¥":"二参":"三参"}}</p>-->
+
+    <!--number 参数为1 表示保留一个小数点-->
+    <!--<p >{{price|number:1}}-->
+
+    <!--全部转大写-->
+    <!--<p>{{name|uppercase}}</p>-->
+    <!--全部转小写-->
+    <!--<p>{{name|lowercase}}</p>-->
+
+    <!--<pre></pre>标签可以识别空格和换行-->
+    <!--json过滤器用来可以换行的输出,阅读更直观,但是要在pre标签下面-->
+    <!--<pre>-->
+    <!--{{str|json}}-->
+    <!--</pre>-->
+
+
+    <!--limitTo用于截取,参数表示截取几位,可以截取字符串也可以截取数组-->
+    <!--<p>{{str|limitTo:2}}</p>-->
+    <!--<p>{{arr|limitTo:2}}</p>-->
+
+
+    <!--date过滤器是将一串数字转换成日期,后面可以接参数-->
+    <!--<p>{{data|date}}</p>-->
+
+
+    <!--orderBy排序,后面接参数,表示以什么排序,第二个参数true可以从大到小-->
+    <!--<p>{{arr2|orderBy:"color":true}}</p>-->
+
+    <!--filter后面的参数表示过滤的有这个值的数-->
+    <!--<p>{{arr2|filter:"10"}}</p>   [{"color":"yellow","age":"10"}]-->
+    <!--<p>{{arr2|filter:"l"}}</p>   [{"color":"blue","age":"28"},{"color":"yellow","age":"10"}]-->
+
+
+    <!--过滤器可以配合使用-->
+    <!--<p>{{str|limitTo:5|uppercase}}</p>-->
+
+
+    <p>{{name2}}</p>
+
+    <p>{{num}}</p>
+
+    <p>{{data2}}</p>
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", [])
+    m1.controller("AAA", ["$scope", "$filter", function ($scope, $filter) {
+        $scope.price = "56565959.222";
+        $scope.name = "DdJjSs";
+        $scope.str = "abcdefghijk";
+        $scope.arr = ["a", "b", "c", "d"];
+        $scope.arr2 = [{color: "red", age: "18"}, {color: "blue", age: "28"}, {color: "yellow", age: "10"}];
+        $scope.data = "38599445454";
+
+
+        //还可以通过$filter服务来过滤
+        $scope.name2 = $filter("uppercase")("aaassdsdsd");
+        $scope.num = $filter("number")("131564654.555", 1) //1表示保留一位小数;
+        $scope.data2 = $filter("date")("1315646545555")
+
+
+    }])
+
+
+</script>
+</html>

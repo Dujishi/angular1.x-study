@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular-1.2.16/angular.min.js"></script>
+</head>
+
+<body>
+<div ng-controller="AAA">
+
+</div>
+</body>
+<script>
+    var m1 = angular.module("myapp", []);
+    m1.controller("AAA", ["$scope", "$location", function ($scope, $location) {
+
+        var a = $location.absUrl();//输出网址信息的绝对地址
+        console.log(a);
+
+
+        $location.path('bbb')    // 路径(可获取也可以设置),后期做路由的操作
+        var b = $location.path();
+        console.log(b);
+
+
+        var c = $location.path("ccc").replace();//放在path后面后就替换掉之前的路径,
+        // 也就不会存在历史管理的方式(一般用不上)
+
+
+        $location.hash('ddd');    //设置或者获取哈希值(hash)
+        //$location.serch({'age': '20'});  //针对串联化数据或者对象的写法设置
+        var d = $location.hash();
+        console.log(d);
+        //localhost/AngularJS/Ng%E6%9C%8D%E5%8A%A1($location).html#/ccc#ddd
+
+
+        var e = $location.url();     //得到的是网址信息,不是绝对地址
+        console.log(e);
+
+
+        var f = $location.host();        //主机名
+        console.log(f);
+        var g = $location.port();        //端口
+        console.log(g);
+        var h = $location.protocol();    //协议
+        console.log(h);
+
+
+    }])
+</script>
+</html>

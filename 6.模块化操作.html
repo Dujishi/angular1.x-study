@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="AAA">
+
+
+</div>
+</body>
+<script>
+
+
+    // 模块化
+    // var m1=angular.module("myapp",[])
+    // m1.controller('AAA', ['$scope', function($scope){
+    // 	$scope.name="aaa"
+
+    // }])
+    //
+    //
+
+
+    // angular.bind()相当于JQ中的$.proxy():改变this指向的
+    // function show(n1,n2) {
+    // 	alert(n1);
+    // 	alert(n2);
+    // 	alert(this)
+    // }
+    // angular.bind(document,show)(3,4);
+
+    // angular.copy(); 拷贝对象
+    // var a ={
+    // 	name:"hello"
+    // };
+
+    // var b ={
+    // 	name:"hi"
+    // }
+
+    // var c=angular.copy(a,b)   //a吧所有值覆盖给了b
+
+    // console.log(b.name)
+    //
+
+    // angular.extend() //对象继承
+    //
+    var a = {
+        name: "hello"
+    };
+
+    var b = {
+        age: "hi"
+    }
+
+    var c = angular.extend(b, a)   //a吧所有值继承给了b
+
+    console.log(b)
+</script>
+</html>

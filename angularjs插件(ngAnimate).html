@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transition:  1s all;
+        }
+        /*CSS方式*/
+
+            .box.ng-enter{opacity: 0}
+            .box.ng-enter-active{opacity: 1}
+            .box.ng-leave{opacity: 1}
+            .box.ng-leave-active{opacity: 0}
+            /*支持CSS方式的指令还有ng-if,ng-view,ng-repeat,ng-include,ng-switch*/
+            /*ng-repeat下面可以有 ng-enter-stagger实现依次进入,例:*/
+            .box.ng-enter-stagger{animate-delay:100ms}
+
+            /*************************************************/
+
+
+            /*支持的指令有ng-class,ng-show,ng-hide,ng-model等*/
+            .box.ng-hide-remove{opacity: 0}
+            .box.ng-hide-remove-active{opacity: 1}
+            .box.ng-hide-add{opacity: 1}
+            .box.ng-hide-add-active{opacity: 0}
+
+
+    </style>
+    <script src="angular1.5.8.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.5.8/angular-animate.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA">
+    <input type="checkbox" ng-model="bBtn">
+    <div ng-if="bBtn" class="box"></div>
+    <div ng-show="bBtn" class="box"></div>
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", ['ngAnimate']);
+    m1.controller("AAA", ["$scope", function ($scope) {
+        $scope.bBtn = true;
+
+
+    }])
+
+</script>
+</html>

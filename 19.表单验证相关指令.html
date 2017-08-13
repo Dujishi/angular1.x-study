@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        input.ng-valid{background-color: green}
+        input.ng-invalid{background-color: red}
+
+    </style>
+    <script src="angular1.2.16.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA" >
+
+    <p>$valid 表单验证通过时为真,失败时为假;   $invalid与之相反;</p>
+    <p>$pristine 原始值,为真,一旦修改了为假;  $dirty与之相反;</p>
+    <p>$error 验证失败或通过都会显示的验证信息,只要是真就代表失败</p>
+    <p>required 验证是不是为空</p>
+
+    <form action="" name="myForm">
+        <input type="text" name="myText" ng-model="text"
+               required ng-minlength="5" ng-pattern="/^[a-zA-Z]+$/">
+        <div>{{myForm.myText.$valid}}</div>
+        <div>{{myForm.myText.$invalid}}</div>
+        <div>{{myForm.myText.$pristine}}</div>
+        <div>{{myForm.myText.$dirty}}</div>
+        <div>{{myForm.myText.$error}}</div>
+        <!--这里同样高版本的angularJs.js在验证失败的时候没有显示false-->
+    </form>
+
+</div>
+</body>
+<script>
+    var m1 = angular.module("myapp", []);
+    m1.controller("AAA", ["$scope", function ($scope) {
+        $scope.text="hello"
+    }])
+</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular-1.2.16/angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="AAA" id="parent">
+
+</div>
+</body>
+<script>
+
+    var m1 = angular.module("myapp", []);
+
+    // $cacheFactory服务是angularjs缓存操作的一种方式,缓存是有利于对代码的优化
+    // $log服务是可以打印出调试信息,和console.log()功能一样
+
+
+    m1.controller("AAA", ["$scope", "$cacheFactory", "$log",
+        function ($scope, $cacheFactory, $log) {
+
+            //第一个参数是缓存的名字,不同的缓存用不同的名字,
+            //第二个参数可以为缓存添加功能,例如设置缓存的最大长度(capacity:2)
+            var cache = $cacheFactory('myCache', {capacity: 2});
+
+            // put方式设置缓存
+            cache.put("name", "hello");
+            cache.put("age", "12");
+            cache.put("color", "red");
+            // info() 缓存的信息
+            console.log(cache.info())
+            // get()  获取指定缓存的值
+            console.log(cache.get('name'));
+            // remove方式清除缓存
+            cache.remove("name");
+            console.log(cache.get('name'));
+
+            ////////////////////////////////////////////////
+
+            $log.log("hello");  //打印信息
+            $log.warn("hello"); //提示警告
+            $log.error("hello"); //提示错误
+
+            ////////////////////////////////////////////////
+
+        }])
+</script>
+</html>
